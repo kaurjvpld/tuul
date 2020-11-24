@@ -1,4 +1,4 @@
-package com.tuul;
+package com.comodule.test;
 
 import com.facebook.react.ReactActivity;
 

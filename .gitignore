@@ -50,3 +50,6 @@ buck-out/
 
 # VSCode
 .vscode
+
+# firebase conf
+/android/app/google-services.json
