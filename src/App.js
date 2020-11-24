@@ -1,14 +1,13 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import styles from 'src/styles/Styles.js';
+import SignIn from 'src/screens/SignIn.js';
 
 const App: () => React$Node = () => {
   return (
-    <>
-      <View style={styles.container}>
-        <Text>Hello World!</Text>
-      </View>
-    </>
+    <View style={styles.container}>
+      <SignIn />
+    </View>
   );
 };
 
