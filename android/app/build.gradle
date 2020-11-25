@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.google.gms.google-services"
 
 import com.android.build.OutputFile
 
@@ -184,6 +184,7 @@ android {
 
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.browser:browser:1.2.0"
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
