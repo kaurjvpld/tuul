@@ -14,7 +14,8 @@ function PhoneSignIn() {
 
   async function confirmCode() {
     try {
-      await confirm.confirm(code);
+      const user = await confirm.confirm(code);
+      console.log(user);
     } catch (error) {
       Alert.alert('Invalid code!');
     }
@@ -45,7 +46,7 @@ function PhoneSignIn() {
   );
 }
 
-const SignIn: () => React$Node = () => {
+const SignInScreen: () => React$Node = () => {
   return (
     <View>
       <PhoneSignIn />
@@ -54,4 +55,4 @@ const SignIn: () => React$Node = () => {
   );
 };
 
-export default SignIn;
+export default SignInScreen;
