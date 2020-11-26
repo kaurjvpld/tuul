@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, StatusBar, Button, TextInput, Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import styles from 'src/styles/Styles.js';
 
 function PhoneSignIn() {
   const [confirm, setConfirm] = useState(null);
@@ -48,7 +49,7 @@ function PhoneSignIn() {
 
 const SignInScreen: () => React$Node = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <PhoneSignIn />
       <StatusBar style="auto" />
     </View>
