@@ -15,8 +15,7 @@ function PhoneSignIn() {
 
   async function confirmCode() {
     try {
-      const user = await confirm.confirm(code);
-      console.log(user);
+      await confirm.confirm(code);
     } catch (error) {
       Alert.alert('Invalid code!');
     }

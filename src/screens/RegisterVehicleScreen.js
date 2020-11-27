@@ -13,8 +13,6 @@ const RegisterVehicleScreen: () => React$Node = () => {
     let authToken = await auth().currentUser.getIdToken();
 
     try {
-      console.log('Auth token: ', authToken);
-      console.log('Vehicle Code: ', code);
       let response = await axios.post(
         `https://us-central1-coscooter-eu.cloudfunctions.net/pair?apiKey=${authToken}`,
         {vehicleCode: code},
