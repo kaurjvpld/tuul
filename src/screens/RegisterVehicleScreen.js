@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Button, TextInput} from 'react-native';
-import styles from 'src/styles/Styles.js';
+import commonStyles from 'src/styles/Styles.js';
 import auth from '@react-native-firebase/auth';
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ const RegisterVehicleScreen: () => React$Node = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={commonStyles.container}>
       <Text>Register Vehicle</Text>
       <TextInput value={code} onChangeText={(text) => setCode(text)} />
       <Button

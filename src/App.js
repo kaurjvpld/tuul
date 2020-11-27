@@ -10,12 +10,13 @@ const App: () => React$Node = () => {
   const [isLoggedIn, setIsLoggedIn] = useState();
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged((user) => {
+    let unsubscribeUserListener = null;
+    const unsubscribeAuthStateListener = auth().onAuthStateChanged((user) => {
       let _isLoggedIn = !!(user || {}).uid;
       setIsLoggedIn(_isLoggedIn);
 
-      if (isLoggedIn) {
-        firestore()
+      if (_isLoggedIn) {
+        unsubscribeUserListener = firestore()
           .collection('users')
           .doc(user.uid)
           .onSnapshot((userSnapshot) => {
@@ -29,7 +30,12 @@ const App: () => React$Node = () => {
         setCurrentUser(null);
       }
     });
-    return subscriber;
+    return () => {
+      unsubscribeAuthStateListener();
+      if (unsubscribeUserListener) {
+        unsubscribeUserListener();
+      }
+    };
   }, [isLoggedIn]);
 
   if (currentUser) {

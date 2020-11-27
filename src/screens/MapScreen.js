@@ -1,25 +1,33 @@
-import React, {useState} from 'react';
-import {View, Text, Button} from 'react-native';
-import styles from 'src/styles/Styles.js';
+import React from 'react';
+import {View, Button, StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 const MapScreen: () => React$Node = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [currentUser, setCurrentUser] = useState();
-
   return (
     <View style={styles.container}>
-      <Text>Map View</Text>
-      <Button
-        title="Sign Out"
-        onPress={() => {
-          auth()
-            .signOut()
-            .then(() => setCurrentUser(null));
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        region={{
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.015,
+          longitudeDelta: 0.0121,
         }}
       />
+      <Button title="Sign Out" onPress={() => auth().signOut()} />
     </View>
   );
 };
 
 export default MapScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
+  },
+});

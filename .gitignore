@@ -53,3 +53,6 @@ buck-out/
 
 # firebase conf
 /android/app/google-services.json
+
+# Android manifest (contains google api key)
+/android/app/src/main/AndroidManifest.xml
