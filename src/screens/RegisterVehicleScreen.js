@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const RegisterVehicleScreen: () => React$Node = () => {
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState();
+  const [currentUser, setCurrentUser] = useState();
   const [code, setCode] = useState('');
 
   async function pairVehicle() {
@@ -43,7 +43,7 @@ const RegisterVehicleScreen: () => React$Node = () => {
         onPress={() => {
           auth()
             .signOut()
-            .then(() => setUser(null));
+            .then(() => setCurrentUser(null));
         }}
       />
     </View>
