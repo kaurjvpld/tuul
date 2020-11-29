@@ -40,7 +40,7 @@ const App: () => React$Node = () => {
 
   if (currentUser) {
     if (currentUser.vehicle) {
-      return <MapScreen />;
+      return <MapScreen vehicleId={currentUser.vehicle} />;
     } else {
       return <RegisterVehicleScreen />;
     }
