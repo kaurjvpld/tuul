@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {
   View,
-  Button,
+  Text,
   StyleSheet,
   Platform,
   PermissionsAndroid,
@@ -13,6 +13,8 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import firestore from '@react-native-firebase/firestore';
 import {Icon} from 'react-native-elements';
+import VehicleDetailsBar from 'src/components/VehicleDetailsBar.js';
+import Loading from 'src/screens/LoadingScreen.js';
 
 const MapScreen: () => React$Node = ({vehicleId}) => {
   const [userLocation, setUserLocation] = useState(undefined);
@@ -80,7 +82,7 @@ const MapScreen: () => React$Node = ({vehicleId}) => {
         if (!vehicleSnapshot) {
           console.log('Vehicle not found');
         } else {
-          setVehicle(vehicleSnapshot.data());
+          setVehicle({...vehicleSnapshot.data(), id: vehicleId});
         }
       });
     return () => {
@@ -88,9 +90,9 @@ const MapScreen: () => React$Node = ({vehicleId}) => {
     };
   }, [vehicleId]);
 
-  return (
-    <View style={styles.container}>
-      {userLocation && vehicle && (
+  if (userLocation && vehicle) {
+    return (
+      <View style={styles.container}>
         <MapView
           ref={mapView}
           provider={PROVIDER_GOOGLE}
@@ -118,22 +120,27 @@ const MapScreen: () => React$Node = ({vehicleId}) => {
             <Image source={require('src/assets/ic_battery_100.png')} />
           </Marker>
         </MapView>
-      )}
-      <View>
-        <Button title="Sign Out" onPress={() => auth().signOut()} />
+        <TouchableOpacity
+          style={styles.logoutContainer}
+          onPress={() => auth().signOut()}>
+          <Text style={styles.logoutButton}>Logout</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.scooterLocation}
+          onPress={() => goToVehicleLocation()}>
+          <Icon name="electric-scooter" style={styles.buttonLight} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.userLocation}
+          onPress={() => goToUserLocation()}>
+          <Icon name="gps-fixed" style={styles.buttonLight} />
+        </TouchableOpacity>
+        <VehicleDetailsBar vehicle={vehicle} />
       </View>
-      <TouchableOpacity
-        style={styles.scooterLocation}
-        onPress={() => goToVehicleLocation()}>
-        <Icon name="electric-scooter" style={styles.buttonLight} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.userLocation}
-        onPress={() => goToUserLocation()}>
-        <Icon name="gps-fixed" style={styles.buttonLight} />
-      </TouchableOpacity>
-    </View>
-  );
+    );
+  }
+
+  return <Loading />;
 };
 
 export default MapScreen;
@@ -147,16 +154,30 @@ const styles = StyleSheet.create({
   },
   scooterLocation: {
     position: 'absolute',
-    bottom: 80,
-    right: 20,
+    bottom: '33%',
+    right: '5%',
   },
   userLocation: {
     position: 'absolute',
-    bottom: 30,
-    right: 20,
+    bottom: '26%',
+    right: '5%',
   },
   buttonLight: {
-    backgroundColor: '#ffffff',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     padding: 8,
+    borderRadius: 6,
+  },
+  logoutContainer: {
+    position: 'absolute',
+    top: '3%',
+    left: '5%',
+  },
+  logoutButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingTop: 8,
+    paddingRight: 10,
+    paddingBottom: 8,
+    paddingLeft: 10,
+    borderRadius: 6,
   },
 });
