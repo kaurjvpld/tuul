@@ -38,6 +38,10 @@ const RegisterVehicleScreen: () => React$Node = () => {
     pairVehicle(_code.data);
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <QRCodeScanner
       onRead={onSuccess}
