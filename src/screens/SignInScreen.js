@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {
   View,
-  StatusBar,
-  Button,
   TextInput,
   Alert,
   StyleSheet,
