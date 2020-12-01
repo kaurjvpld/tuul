@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {Col, Row, Grid} from 'react-native-easy-grid';
@@ -39,21 +38,10 @@ const VehicleDetailsBar: () => React$Node = ({vehicle}) => {
   return (
     <Grid>
       <Row size={75} />
-      <Row
-        size={9}
-        style={{backgroundColor: 'rgba(255, 255, 255, 0.9)', paddingTop: 20}}>
-        <Col
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRightColor: '#ddddde',
-            borderRightWidth: 2,
-            borderRightStyle: 'double',
-          }}>
+      <Row size={9} style={styles.rowOne}>
+        <Col style={styles.colOne}>
           <Text>Battery</Text>
-          <Text style={{fontWeight: 'bold', marginTop: 2, marginBottom: 2}}>
-            {vehicle.soc}%
-          </Text>
+          <Text style={styles.boldText}>{vehicle.soc}%</Text>
           <Text>
             <View>
               <Text>
@@ -65,7 +53,7 @@ const VehicleDetailsBar: () => React$Node = ({vehicle}) => {
               </Text>
             </View>
             <View>
-              <Text style={{marginLeft: 10}}>
+              <Text style={styles.ml10}>
                 R
                 {typeof vehicle.batOneSoc === 'number'
                   ? vehicle.batOneSoc
@@ -75,23 +63,15 @@ const VehicleDetailsBar: () => React$Node = ({vehicle}) => {
             </View>
           </Text>
         </Col>
-        <Col style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Col style={styles.center}>
           <Text>Odometer</Text>
-          <Text style={{fontWeight: 'bold', marginTop: 2}}>
+          <Text style={styles.boldText}>
             {Math.round(vehicle.odometer * 10) / 10}km
           </Text>
         </Col>
       </Row>
-      <Row
-        size={10}
-        style={{backgroundColor: 'rgba(255, 255, 255, 0.9)', paddingTop: 10}}>
-        <Col
-          style={{
-            justifyContent: 'center',
-            alignItems: 'stretch',
-            paddingLeft: 30,
-            paddingRight: 30,
-          }}>
+      <Row size={10} style={styles.rowTwo}>
+        <Col style={styles.colTwo}>
           {vehicle.poweredOn && (
             <TouchableOpacity
               onPress={() => stopScooter()}
@@ -123,13 +103,7 @@ const VehicleDetailsBar: () => React$Node = ({vehicle}) => {
             </TouchableOpacity>
           )}
         </Col>
-        <Col
-          style={{
-            justifyContent: 'center',
-            alignItems: 'stretch',
-            paddingLeft: 30,
-            paddingRight: 30,
-          }}>
+        <Col style={styles.colTwo}>
           <TouchableOpacity
             onPress={() => openBatteryDoor()}
             disabled={processingCommand}>
@@ -172,5 +146,37 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderRadius: 6,
     textAlign: 'center',
+  },
+  colOne: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRightColor: '#ddddde',
+    borderRightWidth: 2,
+  },
+  colTwo: {
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    paddingLeft: 30,
+    paddingRight: 30,
+  },
+  rowOne: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingTop: 20,
+  },
+  rowTwo: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingTop: 10,
+  },
+  boldText: {
+    fontWeight: 'bold',
+    marginTop: 2,
+    marginBottom: 2,
+  },
+  ml10: {
+    marginLeft: 10,
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

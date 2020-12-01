@@ -13,8 +13,6 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import Loading from 'src/screens/LoadingScreen.js';
 
 const RegisterVehicleScreen: () => React$Node = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [currentUser, setCurrentUser] = useState();
   const [vehicleCode, setVehicleCode] = useState('');
   const [loading, setLoading] = useState(false);
 
