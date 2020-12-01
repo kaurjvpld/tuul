@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import axios from 'axios';
 import auth from '@react-native-firebase/auth';
@@ -27,7 +27,7 @@ const VehicleDetailsBar: () => React$Node = ({vehicle}) => {
         {command, vehicleId},
       );
     } catch (error) {
-      console.log(
+      Alert.alert(
         'Something went wrong when sending the command to the scooter..',
       );
       console.log(error.message);
