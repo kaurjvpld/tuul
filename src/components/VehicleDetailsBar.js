@@ -111,7 +111,15 @@ const VehicleDetailsBar: () => React$Node = ({vehicle}) => {
             <TouchableOpacity
               onPress={() => startScooter()}
               disabled={processingCommand}>
-              <Text style={styles.button}>START</Text>
+              <Text
+                style={[
+                  styles.button,
+                  processingCommand
+                    ? styles.primaryButtonDisabled
+                    : styles.primaryButtonEnabled,
+                ]}>
+                START
+              </Text>
             </TouchableOpacity>
           )}
         </Col>
