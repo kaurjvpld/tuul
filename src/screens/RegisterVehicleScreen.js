@@ -14,7 +14,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 const RegisterVehicleScreen: () => React$Node = () => {
   // eslint-disable-next-line no-unused-vars
   const [currentUser, setCurrentUser] = useState();
-  const [code, setCode] = useState('');
+  const [vehicleCode, setVehicleCode] = useState('');
 
   async function pairVehicle(_code) {
     let authToken = await auth().currentUser.getIdToken();
@@ -45,12 +45,12 @@ const RegisterVehicleScreen: () => React$Node = () => {
           <Text style={styles.prefix}>code</Text>
           <TextInput
             placeholder="Insert code & click Pair"
-            onChangeText={(_code) => setCode(_code)}
+            onChangeText={(_code) => setVehicleCode(_code)}
             style={styles.input}
           />
           <TouchableOpacity
             style={styles.suffix}
-            onPress={() => pairVehicle(code)}>
+            onPress={() => pairVehicle(vehicleCode)}>
             <Text style={styles.suffixText}>Pair</Text>
           </TouchableOpacity>
         </View>

@@ -12,7 +12,7 @@ import commonStyles from 'src/styles/Styles.js';
 
 function PhoneSignIn() {
   const [confirm, setConfirm] = useState(null);
-  const [code, setCode] = useState('');
+  const [confirmationCode, setConfirmationCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const countryCode = '+372';
 
@@ -31,7 +31,7 @@ function PhoneSignIn() {
 
   async function confirmCode() {
     try {
-      await confirm.confirm(code);
+      await confirm.confirm(confirmationCode);
     } catch (error) {
       Alert.alert('Invalid code!');
     }
@@ -60,9 +60,9 @@ function PhoneSignIn() {
     <View>
       <TextInput
         style={styles.confirmCodeInput}
-        value={code}
+        value={confirmationCode}
         keyboardType="number-pad"
-        onChangeText={(text) => setCode(text)}
+        onChangeText={(text) => setConfirmationCode(text)}
       />
       <TouchableOpacity onPress={() => confirmCode()}>
         <Text style={styles.button}>CONFIRM CODE</Text>

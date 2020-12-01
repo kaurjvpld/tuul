@@ -7,6 +7,7 @@ import {
   PermissionsAndroid,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
@@ -80,7 +81,7 @@ const MapScreen: () => React$Node = ({vehicleId}) => {
       .doc(vehicleId)
       .onSnapshot((vehicleSnapshot) => {
         if (!vehicleSnapshot) {
-          console.log('Vehicle not found');
+          Alert.alert('Vehicle not found..');
         } else {
           setVehicle({...vehicleSnapshot.data(), id: vehicleId});
         }

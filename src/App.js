@@ -7,15 +7,13 @@ import firestore from '@react-native-firebase/firestore';
 
 const App: () => React$Node = () => {
   const [currentUser, setCurrentUser] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState();
 
   useEffect(() => {
     let unsubscribeUserListener = null;
     const unsubscribeAuthStateListener = auth().onAuthStateChanged((user) => {
-      let _isLoggedIn = !!(user || {}).uid;
-      setIsLoggedIn(_isLoggedIn);
+      let isLoggedIn = !!(user || {}).uid;
 
-      if (_isLoggedIn) {
+      if (isLoggedIn) {
         unsubscribeUserListener = firestore()
           .collection('users')
           .doc(user.uid)
@@ -36,7 +34,7 @@ const App: () => React$Node = () => {
         unsubscribeUserListener();
       }
     };
-  }, [isLoggedIn]);
+  }, []);
 
   if (currentUser) {
     if (currentUser.vehicle) {
