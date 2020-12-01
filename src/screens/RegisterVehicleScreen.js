@@ -10,13 +10,16 @@ import {
 import auth from '@react-native-firebase/auth';
 import axios from 'axios';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import Loading from 'src/screens/LoadingScreen.js';
 
 const RegisterVehicleScreen: () => React$Node = () => {
   // eslint-disable-next-line no-unused-vars
   const [currentUser, setCurrentUser] = useState();
   const [vehicleCode, setVehicleCode] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function pairVehicle(_code) {
+    setLoading(true);
     let authToken = await auth().currentUser.getIdToken();
 
     try {
@@ -25,6 +28,7 @@ const RegisterVehicleScreen: () => React$Node = () => {
         {vehicleCode: _code},
       );
     } catch (error) {
+      setLoading(false);
       Alert.alert('Something went wrong when pairing vehicle..');
       console.log(error.message);
     }

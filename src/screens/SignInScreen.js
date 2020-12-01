@@ -9,32 +9,46 @@ import {
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import commonStyles from 'src/styles/Styles.js';
+import Loading from 'src/screens/LoadingScreen.js';
 
 function PhoneSignIn() {
   const [confirm, setConfirm] = useState(null);
   const [confirmationCode, setConfirmationCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const countryCode = '+372';
 
   async function signInWithPhoneNumber() {
+    setLoading(true);
     let confirmation = null;
+
     try {
       confirmation = await auth().signInWithPhoneNumber(
         countryCode + phoneNumber,
       );
     } catch (error) {
+      setLoading(false);
       Alert.alert('Could not send confirmation code..');
     }
 
+    setLoading(false);
     setConfirm(confirmation);
   }
 
   async function confirmCode() {
+    setLoading(true);
+
     try {
       await confirm.confirm(confirmationCode);
     } catch (error) {
+      setLoading(false);
       Alert.alert('Invalid code!');
     }
+  }
+
+  if (loading) {
+    return <Loading />;
   }
 
   if (!confirm) {

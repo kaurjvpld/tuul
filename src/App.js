@@ -18,11 +18,14 @@ const App: () => React$Node = () => {
           .collection('users')
           .doc(user.uid)
           .onSnapshot((userSnapshot) => {
-            console.log(JSON.stringify(userSnapshot.data()));
-            setCurrentUser({
-              id: userSnapshot.id,
-              ...userSnapshot.data(),
-            });
+            if (userSnapshot) {
+              setCurrentUser({
+                id: userSnapshot.id,
+                ...userSnapshot.data(),
+              });
+            } else {
+              setCurrentUser(null);
+            }
           });
       } else {
         setCurrentUser(null);
